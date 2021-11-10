@@ -1,10 +1,8 @@
 package nl.xservices.plugins.actionsheet;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.os.Build;
-import android.text.TextUtils;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -13,8 +11,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 /**
  * @author Original excellent PR by: Brill Pappin
@@ -86,8 +90,15 @@ public class ActionSheet extends CordovaPlugin {
           builder = new AlertDialog.Builder(cordova.getActivity());
         }
 
+        TextView textView = new TextView(cordova.getActivity());
+        textView.setText(title);
+        textView.setPadding(30, 30, 30, 0);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(17);
+        textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+
         builder
-            .setTitle(title)
+            .setCustomTitle(textView)
             .setCancelable(true);
 
 
